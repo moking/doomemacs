@@ -21,12 +21,18 @@
 (add-to-list 'auto-mode-alist '("/\\.doom\\(?:project\\|module\\|profile\\)?\\'" . lisp-data-mode))
 (add-to-list 'auto-mode-alist '("/\\.doomrc\\'" . emacs-lisp-mode))
 
+(defun save-and-normal-mode ()
+  "Save the current file and switch to normal mode."
+  (interactive)
+  (save-buffer)  ;; Save the current buffer
+  (evil-normal-state))  ;; Switch to normal mode
+
 (add-hook 'evil-mode-hook
           (lambda ()
             (define-key evil-normal-state-map (kbd "w") 'ace-window)
             (define-key evil-normal-state-map (kbd "q") 'evil-delete-buffer)
             (define-key evil-normal-state-map (kbd "<f2>") 'save-buffer)
-            (define-key evil-insert-state-map (kbd "<f2>") 'save-buffer)
+            (define-key evil-insert-state-map (kbd "<f2>") 'save-and-normal-mode)
             (define-key evil-normal-state-map (kbd "fd") 'xref-find-definitions)
             (define-key evil-normal-state-map (kbd "fr") 'xref-find-references)
             (define-key evil-normal-state-map (kbd "ff") 'project-find-file)
@@ -37,6 +43,12 @@
 
 (global-set-key (kbd "M-y") 'evil-yank-line)
 (global-set-key (kbd "M-p") 'evil-paste-after)
+(global-set-key (kbd "<f5>") 'diff-hl-show-hunk)
+(global-set-key (kbd "<f4>") 'global-whitespace-mode)
+(global-set-key (kbd "M-<f3>") 'ace-window)
+(global-set-key (kbd "<f7>") 'project-compile)
+(global-set-key (kbd "<f3>") 'evil-mode)
+(global-set-key (kbd "<f6>") 'counsel-projectile-git-grep)
 
 ;(require ‘xcscope)
 (cscope-setup)
@@ -67,4 +79,22 @@
   (setq company-idle-delay 0.3)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t))
+
+(setq org-publish-project-alist
+      '(("org"
+         :base-directory "~/vimwiki/org/"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/vimwiki_html/"
+         :section-numbers nil
+         :with-toc nil
+         :html-head "<link rel=\"stylesheet\"
+                    href=\"../other/mystyle.css\"
+                    type=\"text/css\"/>")))
+
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+(setq case-fold-search nil)
+(setq evil-ex-search-case 'sensitive)
+(setq global-display-fill-column-indicator-mode-major-mode t)
+(setq lsp-completion-mode t)
+(doom-require 'moe-theme)
 ;;; init.el ends here

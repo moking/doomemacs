@@ -31,7 +31,11 @@
 (package! better-jumper :pin "b1bf7a3c8cb820d942a0305e0e6412ef369f819c")
 (package! dtrt-indent :pin "a8aa356684804c52f26602d4e315f1306c6f3e59")
 (package! smartparens :pin "c7519a1b69f196050a13e2230b7532893b077086")
-(package! ws-butler :pin "e3a38d93e01014cd47bf5af4924459bd145fd7c4")
+;(package! ws-butler :pin "e3a38d93e01014cd47bf5af4924459bd145fd7c4")
+(package! ws-butler :recipe
+  (:host github
+   :repo "lewang/ws-butler"
+   :branch "master"))
 
 ;; doom-projects.el
 (package! projectile :pin "0a15d81be953150399170f4b8e53b86ee96ad639")
@@ -52,5 +56,19 @@
 ;(package! clangd)
 (package! lsp-mode)
 (package! company)
+(package! treemacs)
+(package! sr-speedbar)
+(package! diff-hl :recipe
+  (:host github
+   :repo "dgutov/diff-hl"
+   :branch "master"))
+(package! lisp-ui :recipe
+  (:host github
+   :repo "emacs-lsp/lsp-ui"
+   :branch "master"))
+(package! lisp-ui :recipe
+  (:host github
+   :repo "kuanyui/moe-theme.el"
+   :branch "master"))
 
-
+(package! counsel-projectile)
