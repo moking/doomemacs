@@ -21,12 +21,18 @@
 (add-to-list 'auto-mode-alist '("/\\.doom\\(?:project\\|module\\|profile\\)?\\'" . lisp-data-mode))
 (add-to-list 'auto-mode-alist '("/\\.doomrc\\'" . emacs-lisp-mode))
 
+(defun save-and-normal-mode ()
+  "Save the current file and switch to normal mode."
+  (interactive)
+  (save-buffer)  ;; Save the current buffer
+  (evil-normal-state))  ;; Switch to normal mode
+
 (add-hook 'evil-mode-hook
           (lambda ()
             (define-key evil-normal-state-map (kbd "w") 'ace-window)
             (define-key evil-normal-state-map (kbd "q") 'evil-delete-buffer)
             (define-key evil-normal-state-map (kbd "<f2>") 'save-buffer)
-            (define-key evil-insert-state-map (kbd "<f2>") 'save-buffer)
+            (define-key evil-insert-state-map (kbd "<f2>") 'save-and-normal-mode)
             (define-key evil-normal-state-map (kbd "fd") 'xref-find-definitions)
             (define-key evil-normal-state-map (kbd "fr") 'xref-find-references)
             (define-key evil-normal-state-map (kbd "ff") 'project-find-file)
@@ -67,4 +73,6 @@
   (setq company-idle-delay 0.3)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t))
+
+(load-theme 'doom-gruvbox t)
 ;;; init.el ends here
