@@ -52,5 +52,9 @@
 ;(package! clangd)
 (package! lsp-mode)
 (package! company)
-
-
+(package! treemacs)
+(package! sr-speedbar)
+(package! diff-hl :recipe
+  (:host github
+   :repo "dgutov/diff-hl"
+   :branch "master"))
