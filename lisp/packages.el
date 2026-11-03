@@ -40,21 +40,3 @@
 ;; doom-keybinds.el
 (package! general :pin "826bf2b97a0fb4a34c5eb96ec2b172d682fd548f")
 (package! which-key :pin "38d4308d1143b61e4004b6e7a940686784e51500")
-(package! ripgrep)
-(package! rg)
-(package! w3m)
-(package! ace-window)
-(package! aweshell :recipe
-  (:host github
-   :repo "manateelazycat/aweshell"
-   :branch "master"))
-(package! xcscope)
-;(package! clangd)
-(package! lsp-mode)
-(package! company)
-(package! treemacs)
-(package! sr-speedbar)
-(package! diff-hl :recipe
-  (:host github
-   :repo "dgutov/diff-hl"
-   :branch "master"))
